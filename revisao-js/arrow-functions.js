@@ -1,66 +1,68 @@
-// Função para fins ilustrativos. Se precisar realmente elevar um
-// número ao quadrado, use o operador ** ou a função Math.pow
-
-// Característas desta função:
-// 1) Tem apenas 1 argumento
-// 2) Seu corpo tem apenas uma linha de código, com return
-function quadrado(n) {
-  return n * n  // n ** 2
+// Função tradicional com 1 parâmetro e 1 linha de código no corpo, com return
+function quadrado(x) {
+  return x * x  // n ** 2
 }
 
-// Reescrevendo a função anterior como arrow function
-// 1) Os parênteses em torno do argumento são omitidos
-// 2) A palavra function, ANTES do argumento, é substituída pelo símbolo =>
-// APÓS o argumento
-// 3) As chaves são omitidas
-// 4) A palavra return é omitida
-const quadrado2 = n => n * n
+// Arrow function equivalente
+// 1) A função deve ser atribuída a uma variável (ou, melhor, a uma constante)
+// 2) Desaparece a palavra chave 'function'
+// 3) Desaparecem os parênteses em torno do parêmetro
+// 4) Após o parâmetro, aparece o símbolo => (flecha, arrow)
+// 5) Desaparecem as chaves em torno do corpo da função
+// 6) Desaparece a palavra chave 'return'
+const quadrado2 = x => x * x
 
-console.log(quadrado(8), quadrado2(8))
+console.log(quadrado(9))
+console.log(quadrado2(9))
 
-// Funcão com mais de 1 argumento
-function potencia(b, e) { // b = base, e = expoente
-  return b ** e
+console.log('-------------------------------------------------')
+
+// Função tradicional com 2 argumentos, 1 linha de corpo com return
+function potencia(base, expoente){
+  return base ** expoente
 }
 
-// Com 1+ argumentos, os parênteses em volta deles devem retornar
-let potencia2 = (b, e) => b ** e
+// Arrow function correspondente
+// Retornam os parênteses em torno dos argumentos
+const potencia2 = (base, expoente) => base ** expoente
 
-console.log(potencia(2, 6), potencia2(2, 6))
+console.log(potencia(3, 5))
+console.log(potencia2(3, 5))
 
-// Função sem argumentos
-function megasena() {
-  // Retorna um número aleatório entre 1 e 60
-  // Math.random() -> retorna um número aleatório entre 0 (inclusive) e 1 (exclusive)
-  // Multiplicando por 60 -> temos um número entre 0 e 59 (fracionário)
-  // Soma 1 -> ajusta a faixa para entre 1 e 60
-  // floor() -> retirar as casas decimais
-  return Math.floor(Math.random() * 60 + 1)
+console.log('-------------------------------------------------')
+
+// Função tradicional sem parâmetros, 1 linha de corpo com return
+function horaAtual() {
+  return new Date()
 }
 
-console.log(megasena(), megasena(), megasena())
+// Arrow function correspondente
+// Os parênteses vazios marcam a posição do argumento
+const horaAtual2 = () => new Date()
 
-// Quando não há argumentos, os parênteses marcam o lugar deles
-const megasena2 = () => Math.floor(Math.random() * 60 + 1)
+console.log(horaAtual().toLocaleString('pt-br', {timeZone: 'America/Sao_Paulo'}))
+console.log(horaAtual2().toLocaleString('pt-br', {timeZone: 'America/Sao_Paulo'}))
 
-console.log(megasena2(), megasena2(), megasena2())
+console.log('-------------------------------------------------')
 
-// Função com mais de uma linha de código no corpo
-function somaTudo(...nums) {
-  let soma = 0
-  for(let n of nums) soma += n
-  return soma
+// Functon tradicional com 1 parâmetro e múltiplas linhas de corpo
+function fatorial(n) {
+  let res = 1 
+  for(let i = n; i > 1; i--) res *= i
+  return res
 }
 
-// Arrow function para corpos com mais de uma linha
-// Voltam as chaves
-// (Os parênteses em torno do argumento são necessários por se tratar
-// de um argumento de resto)
-let somaTudo2 = (...nums) => {
-  let soma = 0
-  for(let n of nums) soma += n
-  return soma
+// Arrow function correspondente
+// Retornam as chaves do corpo da função
+const fatorial2 = n => {
+  let res = 1 
+  for(let i = n; i > 1; i--) res *= i
+  return res
 }
 
-// Conclusão: o formato arrow function é indicado quando a função se resolve em
-// apenas uma linha (ou poucas linhas, como exceção).
+// Arrow functio fatorial recursivo
+const fatorial3 = n => (n <= 1 ? 1 : n * fatorial3(n -1))
+
+console.log(fatorial(5))
+console.log(fatorial2(5))
+console.log(fatorial3(5))

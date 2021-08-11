@@ -1,28 +1,24 @@
-// Parâmetros predefinidos ou opcionais em funções
-// Regras:
-// 1) Parâmetros opcionais devem vir após os obrigatórios
-// 2) Pode haver mais de um parâmetro opcional por função
+// Forma é um parâmetro opcional, Sendo assim, ele não
+// precisa ser informado na chamada da funcção. Caso
+// tenha sito omitido, assumirá o valor 'R'.
 
-// forma como parâmetro predefinido ou opcional
-function calcularArea(base, altura, forma = 'Q', casasDec = 2) {
-  let res
-  switch(forma) {
-    case 'Q': // Quadrilátero
-      res = base * altura
+function areaForma (base, altura, forma = 'R') {
+  let area
+  switch (forma) {
+    case 'R':       // Retângulo
+      area  = base * altura
+      break;
+    case 'T':       // Triângulo
+      area = base * altura / 2
       break
-    case 'T': // Triângulo
-      res = base * altura / 2
-      break
-    case 'E': // Elipse
-      res = (base / 2) * (altura / 2) * Math.PI
+    case 'E':       // Elipse
+      area = (base / 2) * (altura / 2) * Math.PI
   }
-  return res.toFixed(casasDec)
+  return area
 }
 
-console.log(calcularArea(20, 8, 'Q'))
-console.log(calcularArea(7.5, 3, 'T'))
-console.log(calcularArea(4.5, 4.5, 'E', 4))
-console.log(calcularArea(30, 60))
-// Caso seja necessário omitir um parâmetro predefinido que não
-// seja o último, pode-se usar o valor undefined em seu lugar
-console.log(calcularArea(30, 60, undefined, 3))
+console.log(`Retângulo 45x15: ${areaForma(45, 15, 'R')}`)
+console.log(`Triângulo 13x8: ${areaForma(13, 8, 'T')}`)
+console.log(`Elipse 12x16: ${areaForma(12, 16, 'E')}`)
+console.log(`Quadrado 6.5x6.5: ${areaForma(6.5, 6.5)}`)
+console.log(`Retângulo 20x25: ${areaForma(20, 25)}`)

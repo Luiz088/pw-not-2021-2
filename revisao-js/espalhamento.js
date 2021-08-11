@@ -1,45 +1,84 @@
-console.log(Math.min(14, 7, -3, 23, 34))  // Retorna o menor valor passado
-console.log(Math.max(14, 7, -3, 23, 34))  // Retorna o maior valor passado
+let minimo = Math.min(15, 7, -8, 14, 0, 9, 18)
+let maximo = Math.max(15, 7, -8, 14, 0, 9, 18)
 
-let numeros = [14, 7, -3, 23, 34]
+console.log({minimo, maximo})
 
-// Usando espalhamento para "desmontar" o vetor
-console.log(Math.min(...numeros))
-console.log(Math.max(...numeros))
+let numeros = [15, 7, -8, 14, 0, 9, 18]
 
-let maisNumeros = [4, 0, 11, ...numeros, 8, 19, 26]
-console.log(maisNumeros)
+// Usando a sintaxe de espalhamento para transformar um vetor
+// em elementos "soltos"
+minimo = Math.min(...numeros)
+maximo = Math.max(...numeros)
 
-// Função com parâmetro (ou argumento) de resto
-function somaTudo(...nums) {
-  let soma = 0
-  for(let n of nums) soma += n
-  return soma
+console.log({minimo, maximo})
+
+let carro1 = {
+     marca: 'Chevrolet',
+     modelo: 'Opala',
+     ano: 1983,
+     cor: 'Verde'
 }
 
-console.log(somaTudo(12, 45, -5))
-console.log(somaTudo(2, 76, -2, 41, 19, 11, 22, 30))
+// Criando o objeto carro2 a partir de carro1
+//let carro2 = carro1
 
-// Argumento convencional + argumento de resto
+// Usando espalhamento para tirar uma cópia real de um objeto
+let carro2 = {...carro1}
+
+carro2.modelo = 'Chevette'
+carro2.cor = 'Bege'
+
+console.log(carro1)
+console.log(carro2)
+
+let soma1 = somaTudo(12, 1, 6, 11, 4, 2, 10, 3, 5, 13, 5)
+let soma2 = somaTudo(121, 103, 144, 153)
+
+// A subtaxe de espalhamento também é usada para receber um
+// número arbitrário de argumentos dentro de um único parâmetro.
+// Dentro da função, esse parâmetro se comporta como um vetor.
+function somaTudo(... nums){
+     let res = 0
+     for(let n of nums) res += n
+     return res
+}
+
+console.log({soma1, soma2})
+
+let resultado1 = calcular('+', 10, 20, 30, 40, 50)
+let resultado2 = calcular('*', 10, 20, 30, 40, 50)
+
+// Assinatura de uma funç]ao é representada pela quantidade e tipo
+// de seus argumentos e peo tipo do seu valor dde retorno
+
+// oper é um argumento obrigatório comum e nuns é um argumento de resto
 function calcular(oper, ...nums) {
-  let res
-  switch(oper) {
-    case '+':
-      //res = 0
-      //for(let n of nums) soma += n
-      res = somaTudo(...nums)
-      break
-
-    case '*':
-      res = 1
-      for(let n of nums) res *= n
-  }
-  return res
+     let res
+     switch(oper) {
+          case '+':
+             res = 0
+             for(let i of nums) nums += i
+             break
+          case '*':
+               res = 1
+               for(let i of nums) nums *= i    
+     }
+     return res
 }
 
-console.log(calcular('*', 12, 45, -5))
-console.log(calcular('+', 2, 76, -2, 41, 19, 11, 22, 30))
 
-// Como chamar a função somaTudo() para processar o vetor maisNumeros?
-console.log(somaTudo(...maisNumeros))
-console.log(calcular('+', ...maisNumeros))
+console.log({resultado1, resultado2})
+
+let legumes = ['batata', 'cenoura', 'abobrinha']
+let frutas = ['maçã', 'banana', 'laranja', 'pera']
+let hortifruti = [...legumes, ...frutas]
+
+console.log({hortifruti})
+
+hortifruti.sort((a, b) => {
+     if (a == b) return 0
+     else if (a > b) return 1
+     else return -1
+})
+
+console.log({hortifruti})
